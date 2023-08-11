@@ -27,7 +27,7 @@
 <li> https://astroscope.ru/horoskop/ejednevniy_goroskop/ пока собираю ежедневные обновления, планирую до конца августа
 
 **Парсеры для сбора информации:**
-<li> Для раскопок в архивах пришлось сделать отдельный парсер на каждый архив. Собрала их все в один ноутбук [вот здесь](https://github.com/shakhovak/Horoscopes_generation_model/blob/master/parsers/Archive_parser_horoscopes.ipynb)
+<li> Для раскопок в архивах пришлось сделать отдельный парсер на каждый архив. Собрала их все в один ноутбук https://github.com/shakhovak/Horoscopes_generation_model/blob/master/parsers/Archive_parser_horoscopes.ipynb
 <li> Для ежедневных сборов подготовила DAG в Airflow, который каждый день обходит порядка 10 сайтов и собирает с них ежедневные обновления в общий файл (примерно 150 в день). DAG будет работать до конца августа и должен собрать примерно 3 тыс.гороскопов.
 
 
