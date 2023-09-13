@@ -19,8 +19,8 @@
 ![Alt text](images/image-2.png)
 
 **Парсеры для сбора информации:**
-<li> Для раскопок в архивах пришлось сделать отдельный парсер на каждый архив. Собрала их все в один [ноутбук](https://github.com/shakhovak/Horoscopes_generation_model/blob/master/parsers/Archive_parser_horoscopes.ipynb)
-<li> Для ежедневных сборов подготовила [DAG](https://github.com/shakhovak/Horoscopes_generation_model/blob/master/parsers/dag_horo.py) в Airflow, который каждый день обходит порядка 10 сайтов и собирает с них ежедневные обновления в общий файл (примерно 150 в день). DAG работал до конца августа.
+- Для раскопок в архивах пришлось сделать отдельный парсер на каждый архив. Собрала их все в один ноутбук [здесь](https://github.com/shakhovak/Horoscopes_generation_model/blob/master/parsers/Archive_parser_horoscopes_fin.ipynb).
+- Для ежедневных сборов подготовила [DAG](https://github.com/shakhovak/Horoscopes_generation_model/blob/master/parsers/dag_horo.py) в Airflow, который каждый день обходит порядка 10 сайтов и собирает с них ежедневные обновления в общий файл (примерно 150 в день). DAG работал до конца августа.
 
 **Итого для проекта собрано 255 тыс. гороскопов.** Файл с необработанными данными [здесь](https://github.com/shakhovak/Horoscopes_generation_model/tree/master/data)
 
@@ -33,6 +33,7 @@
 
 ![Alt text](images/image-3.png)
 
+*PS:* При обработке был допущен ряд неточностей (например, удалено тире из знаков препинания, "не дочищен" рекламный текст из гороскопов и т.д.), что привело к ошибкам и в генерации текста. Часть я попробовала исправить при генерации, но удалось не все. Нужно внимательнее относится к обработке текста :sweat_smile:.
 
 ## 3. Обучение моделей. 
 
@@ -42,7 +43,7 @@
 2. https://huggingface.co/ai-forever/FRED-T5-large - Full-scale Russian Enhanced Denoisers T5. Ноутбук с кодом здесь.
 3. https://huggingface.co/google/mt5-large - a multilingual variant of T5 that was pre-trained on a new Common Crawl-based dataset covering 101 languages. Ноутбук с кодом здесь.
 
-Среда обучения - ВМ в Yandex.Cloud. Обучение на 1 GPU NVIDIA Ampere, RAM 119, 28 vCPUs [более детально](https://cloud.yandex.com/en/docs/datasphere/concepts/configurations)
+Среда обучения - ВМ в Yandex.Cloud. Обучение на 1 GPU NVIDIA Ampere, RAM 119, 28 vCPUs [более детально](https://cloud.yandex.com/en/docs/datasphere/concepts/configurations).
 
 Base-модели обучаются примерно 30 мин, large - 1 час.
 
@@ -121,3 +122,12 @@ mt5-large
 
 ![Alt text](images/image-17.png)
 ![Alt text](images/image-18.png)
+
+## 6. Добавление модели в чат-бот в Телеграмме.
+На последнем этапе добавлю модель FRED-T5 в чат бот в телеграмме (файл с скриптом [здесь](https://github.com/shakhovak/Horoscopes_generation_model/blob/master/horo_aiogram_bot.py). Не удалось пока разместить чат-бот в облаке, поэтому запускается только локально. Ниже принт-скрины работы чата.
+
+![image](https://github.com/shakhovak/Horoscopes_generation_model/assets/89096305/370c589b-3ec7-409f-ab8d-a6a4924a146e)
+![image](https://github.com/shakhovak/Horoscopes_generation_model/assets/89096305/d214693f-9ed1-4484-adaf-28c987943e19)
+![image](https://github.com/shakhovak/Horoscopes_generation_model/assets/89096305/2fea962a-94a7-41d4-9e8f-96594d20880f)
+
+
